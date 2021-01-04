@@ -47,6 +47,13 @@ public:
         button->setButtonText(name);
     }
     
+    int getSelectedFilter() {
+        return selectedFilter;
+    }
+
+    void setSelectedFilter(int value) {
+        selectedFilter = value;
+    }
 
 private:
     // This reference is provided as a quick way for your editor to
@@ -66,6 +73,8 @@ private:
     juce::ToggleButton lowCutButton;
     juce::ToggleButton highCutButton;
     juce::ToggleButton notchButton;
+
+    int selectedFilter;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DSBVbeleg1AudioProcessorEditor)
 };

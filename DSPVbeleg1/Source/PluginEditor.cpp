@@ -66,7 +66,26 @@ DSBVbeleg1AudioProcessorEditor::DSBVbeleg1AudioProcessorEditor (DSBVbeleg1AudioP
 
     applyButton.setButtonText("Filter anwenden.");
     applyButton.onClick = [this] {
-        audioProcessor.lpf1_coeffs(highCutFilter.getValue(), audioProcessor.getSampleRate());
+        switch (getSelectedFilter()) {
+        case 0: 
+            if (lowCutMenu.getSelectedId() == 1) {
+                audioProcessor.hpf1_coeffs(lowCutFilter.getValue(), audioProcessor.getSampleRate());
+            } else {
+                audioProcessor.lpf2_coeffs(lowCutFilter.getValue(), lowCutPercent.getValue(), audioProcessor.getSampleRate());
+            }
+            break;
+        case 1: 
+            if (highCutMenu.getSelectedId() == 1) {
+                audioProcessor.lpf1_coeffs(highCutFilter.getValue(), audioProcessor.getSampleRate());
+            } else {
+                audioProcessor.lpf2_coeffs(highCutFilter.getValue(), highCutPercent.getValue(), audioProcessor.getSampleRate());
+            }
+            break;
+        case 2:
+            break;
+        default:
+            break;
+        }
     };
     addAndMakeVisible(&applyButton);
 
@@ -87,9 +106,23 @@ DSBVbeleg1AudioProcessorEditor::DSBVbeleg1AudioProcessorEditor (DSBVbeleg1AudioP
     addAndMakeVisible(notchButton);
 
 
-    lowCutButton.onClick = [this] { normalToggleState(&lowCutButton, "Hochpassfilter"); };
-    highCutButton.onClick = [this] { normalToggleState(&highCutButton, "Tiefpassfilter"); };
-    notchButton.onClick = [this] { normalToggleState(&notchButton, "Notchfilter"); };
+    lowCutButton.onClick = [this] 
+    { 
+        normalToggleState(&lowCutButton, "Hochpassfilter");
+        setSelectedFilter(0);
+     };
+
+    highCutButton.onClick = [this] 
+    { 
+        normalToggleState(&highCutButton, "Tiefpassfilter");
+        setSelectedFilter(1);
+    };
+
+    notchButton.onClick = [this] 
+    {
+        normalToggleState(&notchButton, "Notchfilter"); 
+        setSelectedFilter(2);
+    };
 
     lowCutButton.setRadioGroupId(FilterButtons);
     highCutButton.setRadioGroupId(FilterButtons);
