@@ -35,8 +35,8 @@ private:
     juce::Slider lowCutFilter;
     juce::Slider highCutFilter;
     juce::Slider notchFilter;
-    juce::Slider percentChoiceOne;
-    juce::Slider percentChoiceTwo;
+    juce::Slider lowCutPercent;
+    juce::Slider highCutPercent;
     juce::ComboBox lowCutMenu;
     juce::ComboBox highCutMenu;
     juce::TextButton applyButton;

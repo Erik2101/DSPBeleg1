@@ -66,7 +66,7 @@ DSBVbeleg1AudioProcessorEditor::DSBVbeleg1AudioProcessorEditor (DSBVbeleg1AudioP
 
     applyButton.setButtonText("Filter anwenden.");
     applyButton.onClick = [this] {
-
+        audioProcessor.lpf1_coeffs(highCutFilter.getValue(), audioProcessor.getSampleRate());
     };
     addAndMakeVisible(&applyButton);
 
