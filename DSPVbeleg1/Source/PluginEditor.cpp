@@ -37,6 +37,24 @@ DSBVbeleg1AudioProcessorEditor::DSBVbeleg1AudioProcessorEditor (DSBVbeleg1AudioP
     highCutFilter.addListener(this);
     addAndMakeVisible(&highCutFilter);
 
+    percentChoiceOne.setSliderStyle(juce::Slider::LinearBarVertical);
+    percentChoiceOne.setRange(0.0, 100.0, 1.0);
+    percentChoiceOne.setTextBoxStyle(juce::Slider::NoTextBox, false, 90, 0);
+    percentChoiceOne.setPopupDisplayEnabled(true, false, this);
+    percentChoiceOne.setTextValueSuffix(" %");
+    percentChoiceOne.setValue(0.0);
+    percentChoiceOne.addListener(this);
+    addAndMakeVisible(&percentChoiceOne);
+
+    percentChoiceTwo.setSliderStyle(juce::Slider::LinearBarVertical);
+    percentChoiceTwo.setRange(0.0, 100.0, 1.0);
+    percentChoiceTwo.setTextBoxStyle(juce::Slider::NoTextBox, false, 90, 0);
+    percentChoiceTwo.setPopupDisplayEnabled(true, false, this);
+    percentChoiceTwo.setTextValueSuffix(" %");
+    percentChoiceTwo.setValue(0.0);
+    percentChoiceTwo.addListener(this);
+    addAndMakeVisible(&percentChoiceTwo);
+
     notchFilter.setSliderStyle(juce::Slider::LinearBarVertical);
     notchFilter.setRange(0.0, 127.0, 1.0);
     notchFilter.setTextBoxStyle(juce::Slider::NoTextBox, false, 90, 0);
@@ -85,12 +103,14 @@ void DSBVbeleg1AudioProcessorEditor::resized()
     highCutMenu.setBounds(160, 40, getWidth() - 300, 20);
     lowCutFilter.setBounds(40, 80, 20, getHeight() - 120);
     highCutFilter.setBounds(190, 80, 20, getHeight() - 120);
+    percentChoiceOne.setBounds(265,80,20,getHeight() - 120);
+    percentChoiceTwo.setBounds(115, 80, 20, getHeight() - 120);
     notchFilter.setBounds(340, 80, 20, getHeight() - 120);
 }
 
 void DSBVbeleg1AudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
 {
-    audioProcessor.noteOnVel = lowCutFilter.getValue();
+    // audioProcessor.noteOnVel = lowCutFilter.getValue();
 }
 
 
