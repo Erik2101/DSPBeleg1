@@ -64,6 +64,12 @@ DSBVbeleg1AudioProcessorEditor::DSBVbeleg1AudioProcessorEditor (DSBVbeleg1AudioP
     notchFilter.addListener(this);
     addAndMakeVisible(&notchFilter);
 
+    applyButton.setButtonText("Filter anwenden.");
+    applyButton.onClick = [this] {
+
+    };
+    addAndMakeVisible(&applyButton);
+
     lowCutMenu.addItem("1.Ordnung", 1);
     lowCutMenu.addItem("2.Ordnung", 2);
     //lowCutMenu.onChange = [this] { lowCutMenuChanged(); };
@@ -106,6 +112,7 @@ void DSBVbeleg1AudioProcessorEditor::resized()
     percentChoiceOne.setBounds(265,80,20,getHeight() - 120);
     percentChoiceTwo.setBounds(115, 80, 20, getHeight() - 120);
     notchFilter.setBounds(340, 80, 20, getHeight() - 120);
+    applyButton.setBounds(0, getHeight() - 25, getWidth(), 25);
 }
 
 void DSBVbeleg1AudioProcessorEditor::sliderValueChanged(juce::Slider* slider)

@@ -39,6 +39,7 @@ private:
     juce::Slider percentChoiceTwo;
     juce::ComboBox lowCutMenu;
     juce::ComboBox highCutMenu;
+    juce::TextButton applyButton;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DSBVbeleg1AudioProcessorEditor)
 };
