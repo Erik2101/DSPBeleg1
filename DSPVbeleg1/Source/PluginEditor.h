@@ -14,20 +14,29 @@
 //==============================================================================
 /**
 */
-class DSPVbeleg1AudioProcessorEditor  : public juce::AudioProcessorEditor
+class DSBVbeleg1AudioProcessorEditor  : public juce::AudioProcessorEditor, private juce::Slider::Listener
 {
 public:
-    DSPVbeleg1AudioProcessorEditor (DSPVbeleg1AudioProcessor&);
-    ~DSPVbeleg1AudioProcessorEditor() override;
+    DSBVbeleg1AudioProcessorEditor (DSBVbeleg1AudioProcessor&);
+    ~DSBVbeleg1AudioProcessorEditor() override;
 
     //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
+    
 
 private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
-    DSPVbeleg1AudioProcessor& audioProcessor;
+    DSBVbeleg1AudioProcessor& audioProcessor;
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DSPVbeleg1AudioProcessorEditor)
+    void sliderValueChanged(juce::Slider* slider) override;
+
+    juce::Slider lowCutFilter;
+    juce::Slider highCutFilter;
+    juce::Slider notchFilter;
+    juce::ComboBox lowCutMenu;
+    juce::ComboBox highCutMenu;
+
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DSBVbeleg1AudioProcessorEditor)
 };

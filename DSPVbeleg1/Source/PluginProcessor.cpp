@@ -10,7 +10,7 @@
 #include "PluginEditor.h"
 
 //==============================================================================
-DSPVbeleg1AudioProcessor::DSPVbeleg1AudioProcessor()
+DSBVbeleg1AudioProcessor::DSBVbeleg1AudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
      : AudioProcessor (BusesProperties()
                      #if ! JucePlugin_IsMidiEffect
@@ -24,17 +24,17 @@ DSPVbeleg1AudioProcessor::DSPVbeleg1AudioProcessor()
 {
 }
 
-DSPVbeleg1AudioProcessor::~DSPVbeleg1AudioProcessor()
+DSBVbeleg1AudioProcessor::~DSBVbeleg1AudioProcessor()
 {
 }
 
 //==============================================================================
-const juce::String DSPVbeleg1AudioProcessor::getName() const
+const juce::String DSBVbeleg1AudioProcessor::getName() const
 {
     return JucePlugin_Name;
 }
 
-bool DSPVbeleg1AudioProcessor::acceptsMidi() const
+bool DSBVbeleg1AudioProcessor::acceptsMidi() const
 {
    #if JucePlugin_WantsMidiInput
     return true;
@@ -43,7 +43,7 @@ bool DSPVbeleg1AudioProcessor::acceptsMidi() const
    #endif
 }
 
-bool DSPVbeleg1AudioProcessor::producesMidi() const
+bool DSBVbeleg1AudioProcessor::producesMidi() const
 {
    #if JucePlugin_ProducesMidiOutput
     return true;
@@ -52,7 +52,7 @@ bool DSPVbeleg1AudioProcessor::producesMidi() const
    #endif
 }
 
-bool DSPVbeleg1AudioProcessor::isMidiEffect() const
+bool DSBVbeleg1AudioProcessor::isMidiEffect() const
 {
    #if JucePlugin_IsMidiEffect
     return true;
@@ -61,50 +61,50 @@ bool DSPVbeleg1AudioProcessor::isMidiEffect() const
    #endif
 }
 
-double DSPVbeleg1AudioProcessor::getTailLengthSeconds() const
+double DSBVbeleg1AudioProcessor::getTailLengthSeconds() const
 {
     return 0.0;
 }
 
-int DSPVbeleg1AudioProcessor::getNumPrograms()
+int DSBVbeleg1AudioProcessor::getNumPrograms()
 {
     return 1;   // NB: some hosts don't cope very well if you tell them there are 0 programs,
                 // so this should be at least 1, even if you're not really implementing programs.
 }
 
-int DSPVbeleg1AudioProcessor::getCurrentProgram()
+int DSBVbeleg1AudioProcessor::getCurrentProgram()
 {
     return 0;
 }
 
-void DSPVbeleg1AudioProcessor::setCurrentProgram (int index)
+void DSBVbeleg1AudioProcessor::setCurrentProgram (int index)
 {
 }
 
-const juce::String DSPVbeleg1AudioProcessor::getProgramName (int index)
+const juce::String DSBVbeleg1AudioProcessor::getProgramName (int index)
 {
     return {};
 }
 
-void DSPVbeleg1AudioProcessor::changeProgramName (int index, const juce::String& newName)
+void DSBVbeleg1AudioProcessor::changeProgramName (int index, const juce::String& newName)
 {
 }
 
 //==============================================================================
-void DSPVbeleg1AudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
+void DSBVbeleg1AudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
 }
 
-void DSPVbeleg1AudioProcessor::releaseResources()
+void DSBVbeleg1AudioProcessor::releaseResources()
 {
     // When playback stops, you can use this as an opportunity to free up any
     // spare memory, etc.
 }
 
 #ifndef JucePlugin_PreferredChannelConfigurations
-bool DSPVbeleg1AudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
+bool DSBVbeleg1AudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
 {
   #if JucePlugin_IsMidiEffect
     juce::ignoreUnused (layouts);
@@ -127,7 +127,7 @@ bool DSPVbeleg1AudioProcessor::isBusesLayoutSupported (const BusesLayout& layout
 }
 #endif
 
-void DSPVbeleg1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
+void DSBVbeleg1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
@@ -157,25 +157,25 @@ void DSPVbeleg1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
 }
 
 //==============================================================================
-bool DSPVbeleg1AudioProcessor::hasEditor() const
+bool DSBVbeleg1AudioProcessor::hasEditor() const
 {
     return true; // (change this to false if you choose to not supply an editor)
 }
 
-juce::AudioProcessorEditor* DSPVbeleg1AudioProcessor::createEditor()
+juce::AudioProcessorEditor* DSBVbeleg1AudioProcessor::createEditor()
 {
-    return new DSPVbeleg1AudioProcessorEditor (*this);
+    return new DSBVbeleg1AudioProcessorEditor (*this);
 }
 
 //==============================================================================
-void DSPVbeleg1AudioProcessor::getStateInformation (juce::MemoryBlock& destData)
+void DSBVbeleg1AudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 {
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
 }
 
-void DSPVbeleg1AudioProcessor::setStateInformation (const void* data, int sizeInBytes)
+void DSBVbeleg1AudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
@@ -185,5 +185,5 @@ void DSPVbeleg1AudioProcessor::setStateInformation (const void* data, int sizeIn
 // This creates new instances of the plugin..
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
-    return new DSPVbeleg1AudioProcessor();
+    return new DSBVbeleg1AudioProcessor();
 }

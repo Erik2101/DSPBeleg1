@@ -13,12 +13,12 @@
 //==============================================================================
 /**
 */
-class DSPVbeleg1AudioProcessor  : public juce::AudioProcessor
+class DSBVbeleg1AudioProcessor  : public juce::AudioProcessor
 {
 public:
     //==============================================================================
-    DSPVbeleg1AudioProcessor();
-    ~DSPVbeleg1AudioProcessor() override;
+    DSBVbeleg1AudioProcessor();
+    ~DSBVbeleg1AudioProcessor() override;
 
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
@@ -53,7 +53,9 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+    float noteOnVel;
+
 private:
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DSPVbeleg1AudioProcessor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DSBVbeleg1AudioProcessor)
 };
