@@ -21,8 +21,31 @@ public:
     ~DSBVbeleg1AudioProcessorEditor() override;
 
     //==============================================================================
+    enum RadioButtonIds
+    {
+        FilterButtons = 1001,
+    };
+
     void paint (juce::Graphics&) override;
     void resized() override;
+
+    void updateToggleState(juce::Button* button, juce::String name)
+    {
+        auto state = button->getToggleState();
+        juce::String stateString = state ? "ON" : "OFF";
+
+        juce::Logger::outputDebugString(name + " Button changed to " + stateString);
+    }
+
+
+    void normalToggleState(juce::Button* button, juce::String name)
+    {
+        auto state = button->getToggleState();
+        juce::String stateString = state ? "ON" : "OFF";
+
+        juce::Logger::outputDebugString(name + " Button changed to " + stateString);
+        button->setButtonText(name);
+    }
     
 
 private:
@@ -40,6 +63,9 @@ private:
     juce::ComboBox lowCutMenu;
     juce::ComboBox highCutMenu;
     juce::TextButton applyButton;
+    juce::ToggleButton lowCutButton;
+    juce::ToggleButton highCutButton;
+    juce::ToggleButton notchButton;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DSBVbeleg1AudioProcessorEditor)
 };

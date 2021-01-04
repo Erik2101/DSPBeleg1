@@ -81,6 +81,19 @@ DSBVbeleg1AudioProcessorEditor::DSBVbeleg1AudioProcessorEditor (DSBVbeleg1AudioP
     //highCutMenu.onChange = [this] { highCutMenuChanged(); };
     highCutMenu.setSelectedId(1);
     addAndMakeVisible(&highCutMenu);
+
+    addAndMakeVisible(lowCutButton);
+    addAndMakeVisible(highCutButton);
+    addAndMakeVisible(notchButton);
+
+
+    lowCutButton.onClick = [this] { normalToggleState(&lowCutButton, "Hochpassfilter"); };
+    highCutButton.onClick = [this] { normalToggleState(&highCutButton, "Tiefpassfilter"); };
+    notchButton.onClick = [this] { normalToggleState(&notchButton, "Notchfilter"); };
+
+    lowCutButton.setRadioGroupId(FilterButtons);
+    highCutButton.setRadioGroupId(FilterButtons);
+    notchButton.setRadioGroupId(FilterButtons);
 }
 
 DSBVbeleg1AudioProcessorEditor::~DSBVbeleg1AudioProcessorEditor()
@@ -92,27 +105,35 @@ void DSBVbeleg1AudioProcessorEditor::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
-
-    g.setColour(juce::Colours::white);
+    /*g.setColour(juce::Colours::white);
     g.setFont(15.0f);
     g.drawFittedText("Hochpassfilter", 10, 0, getWidth(), 30, juce::Justification::centredLeft, 1);
     g.drawFittedText("Tiefpassfilter", 160, 0, getWidth(), 30, juce::Justification::centredLeft, 1);
-    g.drawFittedText("Notchfilter", 310, 0, getWidth(), 30, juce::Justification::centredLeft, 1);
+    g.drawFittedText("Notchfilter", 310, 0, getWidth(), 30, juce::Justification::centredLeft, 1);*/
 }
 
 void DSBVbeleg1AudioProcessorEditor::resized()
 {
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
+    lowCutButton.setBounds(10, 0, getWidth(), 30);
+    highCutButton.setBounds(160, 0, getWidth(), 30);
+    notchButton.setBounds(310, 0, getWidth(), 30);
 
     lowCutMenu.setBounds(10, 40, getWidth() - 300, 20);
     highCutMenu.setBounds(160, 40, getWidth() - 300, 20);
+
     lowCutFilter.setBounds(40, 80, 20, getHeight() - 120);
-    highCutFilter.setBounds(190, 80, 20, getHeight() - 120);
     lowCutPercent.setBounds(80, 80, 20, getHeight() - 120);
+
+    highCutFilter.setBounds(190, 80, 20, getHeight() - 120);
     highCutPercent.setBounds(230, 80, 20, getHeight() - 120);
+
     notchFilter.setBounds(340, 80, 20, getHeight() - 120);
+
     applyButton.setBounds(0, getHeight() - 25, getWidth(), 25);
+
+
 }
 
 void DSBVbeleg1AudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
