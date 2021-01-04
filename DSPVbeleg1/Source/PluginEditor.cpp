@@ -69,19 +69,20 @@ DSBVbeleg1AudioProcessorEditor::DSBVbeleg1AudioProcessorEditor (DSBVbeleg1AudioP
         switch (getSelectedFilter()) {
         case 0: 
             if (lowCutMenu.getSelectedId() == 1) {
-                audioProcessor.hpf1_coeffs(lowCutFilter.getValue(), audioProcessor.getSampleRate());
+                audioProcessor.lowCut1(lowCutFilter.getValue(), audioProcessor.getSampleRate());
             } else {
-                audioProcessor.lpf2_coeffs(lowCutFilter.getValue(), lowCutPercent.getValue(), audioProcessor.getSampleRate());
+                audioProcessor.lowCut2(lowCutFilter.getValue(), lowCutPercent.getValue(), audioProcessor.getSampleRate());
             }
             break;
         case 1: 
             if (highCutMenu.getSelectedId() == 1) {
-                audioProcessor.lpf1_coeffs(highCutFilter.getValue(), audioProcessor.getSampleRate());
+                audioProcessor.highCut1(highCutFilter.getValue(), audioProcessor.getSampleRate());
             } else {
-                audioProcessor.lpf2_coeffs(highCutFilter.getValue(), highCutPercent.getValue(), audioProcessor.getSampleRate());
+                audioProcessor.highCut2(highCutFilter.getValue(), highCutPercent.getValue(), audioProcessor.getSampleRate());
             }
             break;
         case 2:
+            // audioProcessor.notch_coeffs(notchFilter.getMaxValue() - notchFilter.getMinValue(), myFrequenzSlider.getValue(), audioProcessor.getSampleRate());
             break;
         default:
             break;

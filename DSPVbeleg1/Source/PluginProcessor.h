@@ -66,7 +66,7 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
-    void hpf1_coeffs(double cuttOff, double sampleRate) {
+    void lowCut1(double cuttOff, double sampleRate) {
         double th = 2.0 * pi * cuttOff / sampleRate;
         double g = cos(th) / (1.0 + sin(th));
         my_coeffs.a0 = (1.0 + g) / 2.0;
@@ -75,7 +75,7 @@ public:
         my_coeffs.b0 = -g;
         my_coeffs.b1 = 0.0;
     }
-    void hpf2_coeffs(double Q, double cuttOff, double sampleRate) {
+    void lowCut2(double Q, double cuttOff, double sampleRate) {
 
         double w = 2.0 * pi * cuttOff / sampleRate;
         double d = 1.0 / Q;
@@ -87,7 +87,7 @@ public:
         my_coeffs.b0 = 2.0 * g;
         my_coeffs.b1 = 2.0 * b;
     };
-    void lpf1_coeffs(double cuttOff, double sampleRate) {
+    void highCut1(double cuttOff, double sampleRate) {
         double th = 2.0 * pi * cuttOff / sampleRate;
         double g = cos(th) / (1.0 + sin(th));
         my_coeffs.a0 = (1.0 - g) / 2.0;
@@ -96,7 +96,7 @@ public:
         my_coeffs.b0 = -g;
         my_coeffs.b1 = 0.0;
     };
-    void lpf2_coeffs(double Q, double cuttOff, double sampleRate) {
+    void highCut2(double Q, double cuttOff, double sampleRate) {
         double w = 2.0 * pi * cuttOff / sampleRate;
         double d = 1.0 / Q;
         double b = 0.5 * (1.0 - (d / 2) * sin(w)) / (1.0 + (d / 2.0) * sin(w));
