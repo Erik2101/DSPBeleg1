@@ -66,7 +66,7 @@ DSBVbeleg1AudioProcessorEditor::DSBVbeleg1AudioProcessorEditor (DSBVbeleg1AudioP
     notchFilter.addListener(this);
     addAndMakeVisible(&notchFilter);
 
-    applyButton.setButtonText("Filter anwenden.");
+    applyButton.setButtonText("Filter anwenden");
     applyButton.onClick = [this] {
         switch (getSelectedFilter()) {
         case 0: 
@@ -94,13 +94,29 @@ DSBVbeleg1AudioProcessorEditor::DSBVbeleg1AudioProcessorEditor (DSBVbeleg1AudioP
 
     lowCutMenu.addItem("1.Ordnung", 1);
     lowCutMenu.addItem("2.Ordnung", 2);
-    //lowCutMenu.onChange = [this] { lowCutMenuChanged(); };
+    lowCutMenu.onChange = [this] { 
+        if (lowCutMenu.getSelectedId() == 1) {
+            lowCutPercent.setVisible(false);
+        }
+        else {
+            lowCutPercent.setVisible(true);
+        }
+    };
+
     lowCutMenu.setSelectedId(1);
     addAndMakeVisible(&lowCutMenu);
 
     highCutMenu.addItem("1.Ordnung", 1);
     highCutMenu.addItem("2.Ordnung", 2);
-    //highCutMenu.onChange = [this] { highCutMenuChanged(); };
+    highCutMenu.onChange = [this] {
+        if (highCutMenu.getSelectedId() == 1) {
+            highCutPercent.setVisible(false);
+        }
+        else {
+            highCutPercent.setVisible(true);
+        }
+    };
+
     highCutMenu.setSelectedId(1);
     addAndMakeVisible(&highCutMenu);
 

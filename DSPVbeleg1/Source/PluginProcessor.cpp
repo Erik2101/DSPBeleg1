@@ -137,21 +137,16 @@ void DSBVbeleg1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
-    //Loop for 2 Channel Stereo Processing
     for (int channels = 0; channels < buffer.getNumChannels(); ++channels) {
 
-        //input channels/data
         const float* inputData = buffer.getReadPointer(channels);
 
-        //output channels/data
         float* outputData = buffer.getWritePointer(channels);
 
         int bufferSize = buffer.getNumSamples();
         float sampleRate = this->getSampleRate();
         double filter = 0.0;
-        //Schleife welche durch den Vector von Audiosignalen des Programms iteriert
         for (int sample = 0; sample < bufferSize; ++sample) {
-            //Prozessing Code: verschiedene Funktionen für verschiedene Filter
             if (sample > 2) {
                 filter = my_coeffs.a0 * inputData[sample] + my_coeffs.a1 * inputData[sample - 1] + my_coeffs.a2 * inputData[sample - 2] - my_coeffs.b0 * inputData[sample - 1] - my_coeffs.b1 * inputData[sample - 2];
             }
