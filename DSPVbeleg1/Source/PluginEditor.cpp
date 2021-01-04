@@ -105,6 +105,9 @@ DSBVbeleg1AudioProcessorEditor::DSBVbeleg1AudioProcessorEditor (DSBVbeleg1AudioP
     addAndMakeVisible(highCutButton);
     addAndMakeVisible(notchButton);
 
+    lowCutButton.setButtonText("Hochpassfilter");
+    highCutButton.setButtonText("Tiefpassfilter");
+    notchButton.setButtonText("Notchfilter");
 
     lowCutButton.onClick = [this] 
     { 
@@ -138,11 +141,6 @@ void DSBVbeleg1AudioProcessorEditor::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
-    /*g.setColour(juce::Colours::white);
-    g.setFont(15.0f);
-    g.drawFittedText("Hochpassfilter", 10, 0, getWidth(), 30, juce::Justification::centredLeft, 1);
-    g.drawFittedText("Tiefpassfilter", 160, 0, getWidth(), 30, juce::Justification::centredLeft, 1);
-    g.drawFittedText("Notchfilter", 310, 0, getWidth(), 30, juce::Justification::centredLeft, 1);*/
 }
 
 void DSBVbeleg1AudioProcessorEditor::resized()
@@ -151,7 +149,7 @@ void DSBVbeleg1AudioProcessorEditor::resized()
     // subcomponents in your editor..
     lowCutButton.setBounds(10, 0, getWidth(), 30);
     highCutButton.setBounds(160, 0, getWidth(), 30);
-    notchButton.setBounds(310, 0, getWidth(), 30);
+    notchButton.setBounds(300, 0, getWidth(), 30);
 
     lowCutMenu.setBounds(10, 40, getWidth() - 300, 20);
     highCutMenu.setBounds(160, 40, getWidth() - 300, 20);
