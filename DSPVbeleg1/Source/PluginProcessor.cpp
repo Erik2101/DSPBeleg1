@@ -8,6 +8,7 @@
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
+using namespace juce;
 
 //==============================================================================
 DSBVbeleg1AudioProcessor::DSBVbeleg1AudioProcessor()
@@ -133,26 +134,29 @@ void DSBVbeleg1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
 
-    // In case we have more outputs than inputs, this code clears any output
-    // channels that didn't contain input data, (because these aren't
-    // guaranteed to be empty - they may contain garbage).
-    // This is here to avoid people getting screaming feedback
-    // when they first compile a plugin, but obviously you don't need to keep
-    // this code if your algorithm always overwrites all the output channels.
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
-    // This is the place where you'd normally do the guts of your plugin's
-    // audio processing...
-    // Make sure to reset the state if your inner loop is processing
-    // the samples and the outer loop is handling the channels.
-    // Alternatively, you can process the samples with the channels
-    // interleaved by keeping the same state.
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
-    {
-        auto* channelData = buffer.getWritePointer (channel);
+    //Loop for 2 Channel Stereo Processing
+    for (int channels = 0; channels < buffer.getNumChannels(); ++channels) {
 
-        // ..do something to the data...
+        //input channels/data
+        const float* inputData = buffer.getReadPointer(channels);
+
+        //output channels/data
+        float* outputData = buffer.getWritePointer(channels);
+
+        int bufferSize = buffer.getNumSamples();
+        float sampleRate = this->getSampleRate();
+        double filter = 0.0;
+        //Schleife welche durch den Vector von Audiosignalen des Programms iteriert
+        for (int sample = 0; sample < bufferSize; ++sample) {
+            //Prozessing Code: verschiedene Funktionen für verschiedene Filter
+            if (sample > 2) {
+                filter = my_coeffs.a0 * inputData[sample] + my_coeffs.a1 * inputData[sample - 1] + my_coeffs.a2 * inputData[sample - 2] - my_coeffs.b0 * inputData[sample - 1] - my_coeffs.b1 * inputData[sample - 2];
+            }
+            outputData[sample] = filter;
+        }
     }
 }
 
