@@ -55,12 +55,14 @@ DSBVbeleg1AudioProcessorEditor::DSBVbeleg1AudioProcessorEditor (DSBVbeleg1AudioP
     highCutPercent.addListener(this);
     addAndMakeVisible(&highCutPercent);
 
-    notchFilter.setSliderStyle(juce::Slider::LinearBarVertical);
-    notchFilter.setRange(0.0, 127.0, 1.0);
+    notchFilter.setSliderStyle(juce::Slider::TwoValueVertical);
+    notchFilter.setRange(20.0, 7000.0, 0.1);
     notchFilter.setTextBoxStyle(juce::Slider::NoTextBox, false, 90, 0);
     notchFilter.setPopupDisplayEnabled(true, false, this);
     notchFilter.setTextValueSuffix(" Hz");
     notchFilter.setValue(1.0);
+    notchFilter.setMaxValue(7000.0);
+    notchFilter.setMinValue(20.0);
     notchFilter.addListener(this);
     addAndMakeVisible(&notchFilter);
 
